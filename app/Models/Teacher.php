@@ -10,13 +10,6 @@ class Teacher extends Model
     use HasFactory;
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class);
-    }
-
-
-
-    public function students()
-    {
-        return $this->belongsToMany(School::class);
+        return $this->hasMany(Subject::class);
     }
 }
