@@ -17,6 +17,8 @@ class CreateTeachersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
+            $table->unsignedBigInteger('subject_id');
+
         });
     }
 

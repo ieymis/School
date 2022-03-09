@@ -13,8 +13,10 @@ class Teacher extends Model
         return $this->belongsToMany(Subject::class);
     }
 
-    public function schools()
+
+
+    public function students()
     {
-        return $this->belongsTo(School::class);
+        return $this->belongsToMany(School::class);
     }
 }

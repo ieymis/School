@@ -13,12 +13,12 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedBigInteger('Student_id');
-            $table->unsignedBigInteger('Teacher_id');
+        Schema::create('subjects', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('teacher_id');
             $table->string('class_number');
-            $table->integer('school_id');
+            $table->unsignedBigInteger('user_id');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('subjects');
     }
 }
