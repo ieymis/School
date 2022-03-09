@@ -13,12 +13,12 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
-            $table->id();
+        Schema::create('teacher_student', function (Blueprint $table) {
+            
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('teacher_id');
             $table->string('class_number');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('subject_id');
         });
     }
 
