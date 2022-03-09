@@ -20,8 +20,8 @@ class CreateStudentsTable extends Migration
             $table->string('age');
             $table->string('grade');
             $table->string('attendance');
-            $table->unsignedBigInteger('subject_id');
-            
+           
+
         });
     }
 
