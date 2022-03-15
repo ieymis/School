@@ -14,7 +14,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        return Teacher::all();
     }
 
     /**
@@ -22,10 +22,6 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +31,17 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $request->validate([
+            'name' => ['required']
+        ]);
+        $teacher = Teacher::create([
+            'name' => $request->name,
+
+        ]);
+        
+        return $teacher;
     }
 
     /**
@@ -46,7 +52,7 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        //
+        return $teacher->load('subjects');
     }
 
     /**
@@ -55,10 +61,7 @@ class TeacherController extends Controller
      * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teacher $teacher)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +72,13 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        //
+        $request->validate([
+            'name' => ['required']
+        ]);
+        $teacher->update([
+            'name' => $request->name,
+        ]);
+        return $teacher;
     }
 
     /**
@@ -80,6 +89,6 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->delete(); //
     }
 }

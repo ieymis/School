@@ -14,7 +14,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        return Subject::all();
     }
 
     /**
@@ -22,10 +22,6 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +31,17 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name' => ['required']
+        ]);
+        $subject = Subject::create([
+            'name' => $request->name,
+
+        ]);
+        $subject->teachers()->attach($request->teacher);
+        $subject->students()->attach($request->student);
+        return $subject;
     }
 
     /**
@@ -46,7 +52,11 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
-        //
+        return $subject->load('teachers');
+        $subject->load('teachers', 'subjectteachers.students');
+
+
+        return  $subject;
     }
 
     /**
@@ -55,10 +65,6 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subject $subject)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +75,14 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        //
+        $request->validate([
+            'name' => ['required']
+        ]);
+        $subject->update([
+            'name' => $request->name,
+        ]);
+        $subject->teachers()->sync($request->teachers);
+        return $subject;
     }
 
     /**
@@ -80,6 +93,6 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        $subject->delete();
     }
 }

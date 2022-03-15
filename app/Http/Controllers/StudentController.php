@@ -14,7 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        return Student::all();
     }
 
     /**
@@ -22,10 +22,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +32,16 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $request->validate([
+            'name' => ['required']
+        ]);
+        $student = Student::create([
+            'name' => $request->name,
+
+        ]);
+        return  $student;
     }
 
     /**
@@ -46,19 +52,10 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return $student;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Student $student)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +66,13 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $request->validate([
+            'name' => ['required']
+        ]);
+        $student->update([
+            'name' => $request->name,
+        ]);
+        return $student;
     }
 
     /**
@@ -80,6 +83,6 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
     }
 }
