@@ -19,4 +19,13 @@ class Teacher extends Model
     {
         return $this->belongsToMany(Subject::class);
     }
+
+    public function subjectTeachers()
+    {
+        return $this->hasMany(SubjectTeacher::class);
+        //, 'course_id', 'course_teacher_id'
+    }
+
+
+    // hasmany su
 }

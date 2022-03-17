@@ -29,7 +29,7 @@ class SubjectTeacher extends Pivot
 
     public function students()
     {
-        return $this->belongsToMany(student::class);
+        return $this->belongsToMany(Student::class);
     }
 
 
@@ -37,4 +37,12 @@ class SubjectTeacher extends Pivot
     {
         return $this->belongsTo(Subject::class);
     }
+    public function teachers()
+    {
+        return $this->belongsTo(Teacher::class);
+        // 'course_teacher_id', 'course_id'
+    }
+
+
+    //belongsto teacher
 }

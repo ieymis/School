@@ -1,7 +1,7 @@
  <?php
 
-use App\Http\Controllers\ClassController;
-use App\Http\Controllers\StudentController;
+    use App\Http\Controllers\ClassController;
+    use App\Http\Controllers\StudentController;
     use App\Http\Controllers\SubjectController;
     use App\Http\Controllers\TeacherController;
     use Illuminate\Http\Request;
@@ -41,7 +41,8 @@ use App\Http\Controllers\StudentController;
     Route::get('subjects/{subject}', [SubjectController::class, 'show']);
     Route::put('subjects/{subject}', [SubjectController::class, 'update']);
     Route::delete('subjects/{subject}', [SubjectController::class, 'destroy']);
-    // Route::get('subjects/show-subjects/{subject}', [SubjectController::class, 'showSubject']);
+
+    Route::get('subjects/show-subjects/{subject}', [SubjectController::class, 'showSubject']);
 
 
     //class

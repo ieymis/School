@@ -19,15 +19,15 @@ class ClassController extends Controller
         return $teacher->load('Subjects');
     }
 
-    
+
     public function registerClass(Request $request)
     {
         $student = Student::where('id', $request->student_id)->first();
 
 
-        $student->SubjectTeachers()->attach([
+        $student->SubjectTeachers()->attach(
             $request->SubjectTeachers_id
-        ]);
-        return $student->load('SubjectsTeachers');
+        );
+        return $student->load('SubjectTeachers');
     }
 }

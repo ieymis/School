@@ -14,6 +14,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
+
         return Teacher::all();
     }
 
@@ -40,7 +41,7 @@ class TeacherController extends Controller
             'name' => $request->name,
 
         ]);
-        
+
         return $teacher;
     }
 

@@ -14,7 +14,7 @@ class Student extends Model
 
     ];
 
-    public function SubjectTeachers()
+    public function subjectTeachers()
     {
         return $this->belongsToMany(SubjectTeacher::class);
     }
@@ -23,5 +23,9 @@ class Student extends Model
     public function subjects()
     {
         return $this->belongsToMany(Subject::class);
+    }
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class);
     }
 }

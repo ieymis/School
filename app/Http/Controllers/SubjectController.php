@@ -14,7 +14,37 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return Subject::all();
+        $subjects = Subject::with('teachers.subjectTeachers.students')->get();
+        $data = $subjects->map(function ($subject) {
+            return [
+                "id" => $subject->id,
+                "name" => $subject->name,
+                'Teachers' => $subject->teachers->map(function ($teacher) {
+                    return [
+                        'id' => $teacher->id,
+                        'name' => $teacher->name,
+                        'students' => $teacher->subjectTeachers->flatMap(function ($subjectTeacher) {
+                            return $subjectTeacher->students->map(function ($student) {
+                                return [
+                                    'id' => $student->id,
+                                    'name' => $student->name,
+                                ];
+                            });
+                        })
+
+                    ];
+                }),
+
+
+
+            ];
+        });
+
+
+        //   return Subject::all();
+
+
+        return $data;
     }
 
     /**
@@ -40,7 +70,7 @@ class SubjectController extends Controller
 
         ]);
         $subject->teachers()->attach($request->teacher);
-        $subject->students()->attach($request->student);
+
         return $subject;
     }
 
@@ -53,10 +83,6 @@ class SubjectController extends Controller
     public function show(Subject $subject)
     {
         return $subject->load('teachers');
-        $subject->load('teachers', 'subjectteachers.students');
-
-
-        return  $subject;
     }
 
     /**
