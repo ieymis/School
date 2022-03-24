@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Subject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SubjectTeacher extends Pivot
 {
@@ -27,22 +29,15 @@ class SubjectTeacher extends Pivot
 
 
 
-    public function students()
-    {
-        return $this->belongsToMany(Student::class);
-    }
+
 
 
     public function subjects()
     {
         return $this->belongsTo(Subject::class);
     }
-    public function teachers()
+    public function users()
     {
-        return $this->belongsTo(Teacher::class);
-        // 'course_teacher_id', 'course_id'
+        return $this->belongsToMany(User::class, 'student_subject_teacher', 'subject_teacher_id', 'student_id', 'id', 'id');
     }
-
-
-    //belongsto teacher
 }
